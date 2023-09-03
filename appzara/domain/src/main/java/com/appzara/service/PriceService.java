@@ -1,0 +1,14 @@
+package com.appzara.service;
+
+import com.appzara.dto.PriceDto;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface PriceService {
+
+    @Transactional
+    List<PriceDto> getPrice(LocalDateTime startDate, String productId, String brandId);
+}

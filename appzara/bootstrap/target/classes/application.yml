@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: appzara
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:appzara;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS appzara\;SET SCHEMA appzara;
+    username: sa
+    password:
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations:
+        - classpath:data/data.sql
