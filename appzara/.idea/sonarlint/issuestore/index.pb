@@ -1,7 +1,4 @@
 
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 >
 domain/pom.xml,8/b/8b11330a6810846535e4b5ba2024ccfcee112862
 C
@@ -30,3 +27,5 @@ Bapi-rest/src/main/java/com/appzara/controller/PriceController.java,3/7/372030e
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 }
 Mbootstrap/src/test/java/com/appzara/rest/controller/PriceControllerITest.java,b/2/b24849b0568c65b42dd0d5487e0f1adaf0a157de
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
