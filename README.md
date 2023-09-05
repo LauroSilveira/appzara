@@ -6,7 +6,6 @@
 * [About](#about)
 * [Techinologies](#techinologies)
 * [How to run](#how-to-run)
-* [Authentication](#login)
 * [Contributors](#contributors)
 
 # About
