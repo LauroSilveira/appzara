@@ -23,9 +23,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -61,13 +62,16 @@ class PriceControllerITest {
         MvcResult response = this.mockMvc.perform(get(
                         URL, "2020-06-14-10.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
+                .andExpect(status().isFound())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
+
         assertFalse(prices.isEmpty());
+        assertEquals(3, prices.size());
     }
 
     @Test
@@ -78,13 +82,15 @@ class PriceControllerITest {
         MvcResult response = this.mockMvc.perform(get(
                         URL, "2020-06-14-16.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
+                .andExpect(status().isFound())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
+        assertEquals(3, prices.size());
     }
 
     @Test
@@ -95,13 +101,15 @@ class PriceControllerITest {
         MvcResult response = this.mockMvc.perform(get(
                         URL, "2020-06-14-21.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
+                .andExpect(status().isFound())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
+        assertEquals(3, prices.size());
     }
 
     @Test
@@ -112,13 +120,15 @@ class PriceControllerITest {
         MvcResult response = this.mockMvc.perform(get(
                         URL, "2020-06-15-10.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
+                .andExpect(status().isFound())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
+        assertEquals(3, prices.size());
     }
 
     @Test
@@ -129,12 +139,14 @@ class PriceControllerITest {
         MvcResult response = this.mockMvc.perform(get(
                         URL, "2020-06-16-21.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
+                .andExpect(status().isFound())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
+        assertEquals(3, prices.size());
     }
 }
