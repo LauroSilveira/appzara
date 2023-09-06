@@ -29,8 +29,8 @@ jobs:
       if: always()
       with:
         name: Test Reporter Summary
-        path: surefire-reports/*.xml
-        reporter: bootstrap/target/surefire-reports/*.xml
+        path: appzara/bootstrap/target/surefire-reports/*.xml
+        reporter: java-junit
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
