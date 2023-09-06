@@ -24,7 +24,7 @@ jobs:
 
       ## Build and execute every test
     - name: Executing Tests
-      run: mvn test
+      run: mvn test --file appzara/pom.xml
 
     ## Generate Test Report Summary
     - name: Test Report
