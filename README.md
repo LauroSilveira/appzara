@@ -1,9 +1,10 @@
 # APPZARA
 
-<p>This is a microservice rest for ZARA recruitment.<p/>
+<p>This is a microservice rest for ZARA recruitment.</p>
 
 ## About this project
 * [About](#about)
+* [Architecture](#architecture)
 * [Techinologies](#techinologies)
 * [How to run](#how-to-run)
 * [Contributors](#contributors)
@@ -12,8 +13,11 @@
 This is a microservice REST created for ZARA recruitment.
 The architecture is built hexagonal architecture, where there is the followings modules:
 
+# Architecture
+![Architecture-hexagonal.png](data%2FArchitecture-hexagonal.png)
+
 #### API-REST
-Adapter Layer, responsible for communicating with external calls e.g.: REST.
+Adapter Layer, responsible for communicating with external calls e.g. REST.
 
 #### APPLICATION
 Layer that implements UseCase and is responsible for communicate with others modules e.g. Infrastructure.
@@ -29,15 +33,15 @@ Persistence Layer, responsible for communicate with database.
 - Spring boot 3.1.3
 - Spring Data
 - H2 Memory
-- Jacoco Report
+- Test Reporter
 
 # How to Run
 <p>
 Import in your IDE and execute the main class AppZaraApplication localized on bootstrap module.
-In the API-REST module there is a PriceController with a GET endpoint with the following parameters:<p/>
+In the API-REST module there is a PriceController with a GET endpoint with the following parameters:</p>
 
 - startDate: date must be on format yyyy-MM-dd-HH.mm.ss
-- productId: id of product e.g: 35455
+- productId: id of product e.g. 35455
 - brandId: id of brand e.g: 1 (ZARA)
 
 
