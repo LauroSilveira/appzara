@@ -21,7 +21,6 @@ jobs:
         cache: maven
     - name: Build and test with Maven
       run: mvn -B package --file ~/appzara/pom.xml
-
     ## Build and execute every test
     - name: Executing Tests
       run: mvn test
