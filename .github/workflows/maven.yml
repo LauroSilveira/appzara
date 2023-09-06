@@ -1,5 +1,5 @@
 name: Java CI with Maven
-
+run-name: ${{ github.actor }} has started workflow
 on:
   push:
     branches: [ "main" ]
@@ -32,7 +32,7 @@ jobs:
       if: always()
       with:
         name: Test Reporter Summary
-        path: appzara/bootstrap/target/surefire-reports/*.xml
+        path: surefire-reports/*.xml
         reporter: java-junit
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
