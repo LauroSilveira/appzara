@@ -22,10 +22,6 @@ jobs:
     - name: Build and test with Maven
       run: mvn -B package --file appzara/pom.xml
 
-    ## GitHub Action H2 Liquid database
-    - name: Liquibase Init Start H2 Action
-      uses: liquibase-github-actions/init-start-h2@v4.23.1
-
       ## Build and execute every test
     - name: Executing Tests
       run: mvn test
@@ -36,7 +32,7 @@ jobs:
       if: always()
       with:
         name: Test Reporter Summary
-        path: target/surefire-reports/*.xml
+        path: appzara/bootstrap/target/surefire-reports/*.xml
         reporter: java-junit
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
