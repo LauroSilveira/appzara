@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.appzara.rest.controller.PriceControllerITest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.076 s - in com.appzara.rest.controller.PriceControllerITest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.63 s -- in com.appzara.rest.controller.PriceControllerITest
