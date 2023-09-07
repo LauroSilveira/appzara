@@ -17,7 +17,7 @@ The architecture is built hexagonal architecture, where there is the followings 
 ![Architecture-hexagonal.png](data%2FArchitecture-hexagonal.png)
 
 #### API-REST
-Adapter Layer, responsible for communicating with external calls e.g. REST.
+Rest layer responsible for communicating with external calls.
 
 #### APPLICATION
 Layer that implements UseCase and is responsible for communicate with others modules e.g. Infrastructure.
@@ -33,17 +33,17 @@ Persistence Layer, responsible for communicate with database.
 - Spring boot 3.1.3
 - Spring Data
 - H2 Memory
-- Test Reporter
+- Jacoco Reporter
 
 # How to Run
 <p>
 Import in your IDE and execute the main class AppZaraApplication localized on bootstrap module.
-In the API-REST module there is a PriceController with a GET endpoint with the following parameters:</p>
+In the API-REST module there is a PriceController with a GET endpoint with the following parameters:
 
-- startDate: date must be on format yyyy-MM-dd-HH.mm.ss
+- startDate: date **must be int the format yyyy-MM-dd-HH.mm.ss**
 - productId: id of product e.g. 35455
 - brandId: id of brand e.g: 1 (ZARA)
-
+</p>
 
 <p>A example of request:</p>
 
