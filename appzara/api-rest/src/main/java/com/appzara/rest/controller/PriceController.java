@@ -1,7 +1,8 @@
-package com.appzara.controller;
+package com.appzara.rest.controller;
 
 
 import com.appzara.dto.PriceDto;
+import com.appzara.exception.ResourceNotFoundException;
 import com.appzara.usecase.PriceUseCase;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,8 @@ public class PriceController {
         log.info("PriceController - method getPrice received request with parameters startDate: {} - productId: {} - brandId: {}", startDate,
                 productId, brandId);
         List<PriceDto> priceDto = this.priceUseCase.getPrice(startDate, productId, brandId);
-        return ResponseEntity.status(HttpStatus.FOUND).body(priceDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(priceDto);
 
     }
 }
