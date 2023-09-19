@@ -9,6 +9,5 @@ import java.util.List;
 
 public interface PriceService {
 
-    @Transactional
     List<PriceDto> getPrice(LocalDateTime startDate, String productId, String brandId);
 }

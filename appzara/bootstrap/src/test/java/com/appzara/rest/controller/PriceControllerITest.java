@@ -63,7 +63,7 @@ class PriceControllerITest {
                         URL, "2020-06-14-10.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
@@ -83,7 +83,7 @@ class PriceControllerITest {
                         URL, "2020-06-14-16.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
@@ -102,7 +102,7 @@ class PriceControllerITest {
                         URL, "2020-06-14-21.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
@@ -121,7 +121,7 @@ class PriceControllerITest {
                         URL, "2020-06-15-10.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
@@ -140,7 +140,7 @@ class PriceControllerITest {
                         URL, "2020-06-16-21.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andReturn();
         //Then
         assertNotNull(response.getResponse().getContentAsString());
