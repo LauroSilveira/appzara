@@ -68,6 +68,8 @@ class GlobalRestControllerAdviceTest {
 
         //Then
         assertEquals(BAD_REQUEST, valueOf(response.getResponse().getStatus()));
+        assertNotNull(response.getResolvedException());
+        assertEquals("Invalid DateTime formmat", response.getResolvedException().getMessage());
     }
 
     @Test
