@@ -1,7 +1,6 @@
 package com.appzara.rest.controller.advice;
 
 import com.appzara.exception.ResourceNotFoundException;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 
-import java.time.format.DateTimeParseException;
+import java.time.DateTimeException;
 
 @RestControllerAdvice
 public class GlobalRestControllerAdvice {
@@ -19,7 +18,7 @@ public class GlobalRestControllerAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new GlobalHandlerException(ex.getMessage()));
     }
 
-    @ExceptionHandler({DateTimeParseException.class})
+    @ExceptionHandler({DateTimeException.class})
     public final ResponseEntity<GlobalHandlerException> handleGenericException(final Exception ex, final WebRequest request) {
         return ResponseEntity.badRequest().body(new GlobalHandlerException("Bad Request"));
     }

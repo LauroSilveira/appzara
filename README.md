@@ -101,7 +101,7 @@ The directory of this file is `appzara/bootstrap/target/site/jacoco-aggregate/in
 
 <p>Open it in your default browser to see the coverage of each module</p>
 
-![jacoco-report.png](data%2Fjacoco-report.png)
+![coverage.png](data%2Fcoverage.png)
 
 ## Contributors
 [@LauroSilveira](https://github.com/LauroSilveira)
