@@ -1,4 +1,4 @@
-# APPZARA
+# Rest API APPZARA
 
 <p>This is a microservice rest for ZARA recruitment.</p>
 
@@ -7,6 +7,7 @@
 * [Architecture](#architecture)
 * [Techinologies](#techinologies)
 * [How to run](#how-to-run)
+* [How to run tests](#how-to-run-tests)
 * [Contributors](#contributors)
 
 # About
@@ -50,7 +51,7 @@ In the API-REST module there is a PriceController with a GET endpoint with the f
 ```shell
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/productId/35455/brandId/1'
 ```
-<p>And an example of response is:<p>
+<p>And an example of response is:</p>
 
 ```json lines
 [
@@ -83,6 +84,24 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
     }
 ]
 ```
+
+# How to run Tests
+
+<p> This project has jacoco-report with we are able to see coverage after execute tests.
+Once you are inside appzara (pom.xml parente) open your favorite prompt execute:</p>
+
+```
+mvn test
+```
+
+After execute tests jacoco-report will generate an index.html file with coverage.
+The directory of this file is `appzara/bootstrap/target/site/jacoco-aggregate/index.html`.
+
+![jacoco-index.png](data%2Fjacoco-index.png)
+
+<p>Open it in your default browser to see the coverage of each module</p>
+
+![jacoco-report.png](data%2Fjacoco-report.png)
 
 ## Contributors
 [@LauroSilveira](https://github.com/LauroSilveira)
