@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -31,7 +33,7 @@ class PriceUseCaseTest {
     @Test
     void should_return_prices_list_correctly_test() {
         //Given
-        when(this.priceService.getPrice(Mockito.any(), Mockito.anyString(), Mockito.anyString()))
+        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
                 .thenReturn(List.of(
                         new PriceDto(1, "35455", 1, 1, LocalDateTime.now(), LocalDateTime.now(),
                                 new BigDecimal(23)),
@@ -41,7 +43,7 @@ class PriceUseCaseTest {
                                 new BigDecimal(23))
                 ));
         //When
-        final var prices = this.priceUseCase.getPrice("2023-09-19-10.23.00", "35455", "1");
+        final var prices = this.priceUseCase.getPrice("2023-09-19-10.23.00", "2023-09-20-10.23.00", "35455", "1");
 
         //Then
         assertNotNull(prices);
@@ -53,6 +55,6 @@ class PriceUseCaseTest {
     void should_throws_dateTimeException_test() {
 
         assertThrows(DateTimeException.class, () ->
-                this.priceUseCase.getPrice(LocalDateTime.now().toString(), "35455", "1"));
+                this.priceUseCase.getPrice(LocalDateTime.now().toString(), LocalDateTime.now().toString(), "35455", "1"));
     }
 }

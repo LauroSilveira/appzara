@@ -22,11 +22,11 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public List<PriceDto> getPrice(LocalDateTime startDate, String productId, String brandId) {
-        log.info("PriceServiceImpl - query to priceRepository with parameters - startDate: {}, productId: {}, " +
-                "brandId: {}", startDate, productId, brandId);
+    public List<PriceDto> getPrice(LocalDateTime startDate, LocalDateTime endDate, String productId, String brandId) {
+        log.info("PriceServiceImpl - query to priceRepository with parameters - startDate: {}, endDate: {}, productId: {}, " +
+                "brandId: {}", startDate, endDate, productId, brandId);
 
-        final List<Price> prices = this.priceRepository.getPrices(startDate, productId, brandId);
+        final List<Price> prices = this.priceRepository.getPrices(startDate, endDate, productId, brandId);
 
         if(prices.isEmpty()) {
             throw new ResourceNotFoundException("Resource not found");

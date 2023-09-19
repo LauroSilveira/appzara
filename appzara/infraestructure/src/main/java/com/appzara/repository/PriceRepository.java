@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PriceRepository extends JpaRepository<Price, Long> {
-    @Query("SELECT p FROM Price p WHERE p.startDate < :date or p.endDate > :date AND p.productId = :productId AND p.brandId = :brandId " +
+    @Query("SELECT p FROM Price p WHERE p.startDate > :startDate or p.endDate < :endDate AND p.productId = :productId AND p.brandId = :brandId " +
             "ORDER BY p.amount")
-    List<Price> getPrices(LocalDateTime date, String productId, String brandId);
+    List<Price> getPrices(LocalDateTime startDate, LocalDateTime endDate, String productId, String brandId);
 }

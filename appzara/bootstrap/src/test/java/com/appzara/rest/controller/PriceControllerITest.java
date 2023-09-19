@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PriceControllerITest {
 
     private static final ObjectMapper mapper = new ObjectMapper();
-    public static final String URL = "/price/startDate/{startDate}/productId/{productId}/brandId/{brandId}";
+    public static final String URL = "/price/startDate/{startDate}/endDate/{endDate}/productId/{productId}/brandId/{brandId}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -55,12 +56,11 @@ class PriceControllerITest {
     }
 
     @Test
-    @DisplayName("Should return pice list for day 14 at 10.00.00 hrs")
     void should_return_price_list_case_1_test() throws Exception {
 
         //When
         MvcResult response = this.mockMvc.perform(get(
-                        URL, "2020-06-14-10.00.00", "35455", "1")
+                        URL, "2020-06-14-10.00.00", "2020-12-31-23.59.59", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -71,16 +71,15 @@ class PriceControllerITest {
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
 
         assertFalse(prices.isEmpty());
-        assertEquals(3, prices.size());
+        assertEquals(1, prices.size());
     }
 
     @Test
-    @DisplayName("Should return pice list for day 14 at 16.00.00 hrs")
     void should_return_price_list_case_2_test() throws Exception {
 
         //When
         MvcResult response = this.mockMvc.perform(get(
-                        URL, "2020-06-14-16.00.00", "35455", "1")
+                        URL, "2020-06-15-00.00.00", "2020-06-15-11.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -90,16 +89,15 @@ class PriceControllerITest {
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
-        assertEquals(3, prices.size());
+        assertEquals(1, prices.size());
     }
 
     @Test
-    @DisplayName("Should return pice list for day 14 at 21.00.00 hrs")
     void should_return_price_list_case_3_test() throws Exception {
 
         //When
         MvcResult response = this.mockMvc.perform(get(
-                        URL, "2020-06-14-21.00.00", "35455", "1")
+                        URL, "2020-06-15-16.00.00", "2020-12-31-23.59.59", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -109,16 +107,15 @@ class PriceControllerITest {
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
-        assertEquals(3, prices.size());
+        assertEquals(1, prices.size());
     }
 
     @Test
-    @DisplayName("Should return pice list for day 15 at 10.00.00 hrs")
-    void should_return_price_list_case_4_test() throws Exception {
+    void should_return_the_highest_price_test() throws Exception {
 
         //When
         MvcResult response = this.mockMvc.perform(get(
-                        URL, "2020-06-15-10.00.00", "35455", "1")
+                        URL, "2020-06-14-15.00.00", "2020-06-14-18.30.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -127,26 +124,9 @@ class PriceControllerITest {
         assertNotNull(response.getResponse().getContentAsString());
 
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
+
         assertFalse(prices.isEmpty());
-        assertEquals(3, prices.size());
-    }
-
-    @Test
-    @DisplayName("Should return pice list for day 16 at 21.00.00 hrs")
-    void should_return_price_list_case_5_test() throws Exception {
-
-        //When
-        MvcResult response = this.mockMvc.perform(get(
-                        URL, "2020-06-16-21.00.00", "35455", "1")
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-        //Then
-        assertNotNull(response.getResponse().getContentAsString());
-
-        List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
-        assertFalse(prices.isEmpty());
-        assertEquals(3, prices.size());
+        assertEquals(1, prices.size());
+        assertEquals(new BigDecimal("38.95"), (prices.get(0).amount()));
     }
 }
