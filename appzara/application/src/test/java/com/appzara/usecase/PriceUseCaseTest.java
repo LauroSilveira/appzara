@@ -1,12 +1,9 @@
 package com.appzara.usecase;
 
 import com.appzara.dto.PriceDto;
-import com.appzara.entity.Price;
 import com.appzara.service.PriceService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -35,11 +32,14 @@ class PriceUseCaseTest {
         //Given
         when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
                 .thenReturn(List.of(
-                        new PriceDto(1, "35455", 1, 1, LocalDateTime.now(), LocalDateTime.now(),
+                        new PriceDto(1, "35455", 1, 1, LocalDateTime.of(2020, 6, 14, 0, 0, 0),
+                                LocalDateTime.of(2020, 12, 31, 23, 59, 59),
                                 new BigDecimal(23)),
-                        new PriceDto(1, "35455", 0, 1, LocalDateTime.now(), LocalDateTime.now(),
+                        new PriceDto(1, "35455", 0, 1, LocalDateTime.of(2020, 6, 14, 15, 0, 0),
+                                LocalDateTime.of(2020, 6, 14, 18, 30, 0),
                                 new BigDecimal(23)),
-                        new PriceDto(1, "35455", 0, 1, LocalDateTime.now(), LocalDateTime.now(),
+                        new PriceDto(1, "35455", 0, 1, LocalDateTime.of(2020, 6, 15, 0, 0, 0),
+                                LocalDateTime.of(2020, 6, 15, 11, 0, 0),
                                 new BigDecimal(23))
                 ));
         //When
@@ -56,5 +56,22 @@ class PriceUseCaseTest {
 
         assertThrows(DateTimeException.class, () ->
                 this.priceUseCase.getPrice(LocalDateTime.now().toString(), LocalDateTime.now().toString(), "35455", "1"));
+    }
+
+    @Test
+    void should_return_list_with_one_element() {
+        //Given
+        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
+                .thenReturn(List.of(new PriceDto(1, "35455", 0, 1,
+                        LocalDateTime.of(2020, 6, 15, 0, 0, 0),
+                        LocalDateTime.of(2020, 6, 15, 11, 0, 0),
+                        new BigDecimal(23))));
+
+        //When
+        final var prices = this.priceUseCase.getPrice("2020-06-15-00.00.00", "2020-06-15-11.00.00", "35455", "1");
+
+        //Then
+        assertFalse(prices.isEmpty());
+        assertEquals(1, prices.size());
     }
 }

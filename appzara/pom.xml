@@ -15,7 +15,7 @@
 
     <packaging>pom</packaging>
     <name>apzara</name>
-    <description>A Zara API</description>
+    <description>A REST API Zara</description>
 
     <modules>
         <module>domain</module>
@@ -91,6 +91,9 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.10</version>
+                <configuration>
+                    <excludes>com/appzara/entity/**</excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>

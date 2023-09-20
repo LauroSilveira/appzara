@@ -29,7 +29,7 @@ public class PriceUseCase {
         final var endDateFormatted = getLocalDateTimeFormatted(endDate);
         final var prices = this.priceService.getPrice(startDateFormatted, endDateFormatted, productId, brandId);
 
-        if (prices != null && prices.size() > 1) {
+        if (prices.size() > 1) {
             return List.of(Objects.requireNonNull(prices.stream().filter(p -> p.priority() == 1)
                     .max(Comparator.comparing(PriceDto::amount)).orElse(null)));
         }

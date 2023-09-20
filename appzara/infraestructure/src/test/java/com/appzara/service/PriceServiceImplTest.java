@@ -56,7 +56,8 @@ class PriceServiceImplTest {
                                 .build())
                 );
         //When
-        final var prices = this.priceService.getPrice(LocalDateTime.now(), LocalDateTime.now(), "35455", "1");
+        final var prices = this.priceService.getPrice(LocalDateTime.of(2020, 6, 15, 16,0,0),
+                LocalDateTime.of(2020, 12,31, 23, 59, 59), "35455", "1");
 
         //Then
         assertNotNull(prices);
@@ -72,6 +73,7 @@ class PriceServiceImplTest {
 
         //Then
         assertThrows(ResourceNotFoundException.class, () ->
-                this.priceService.getPrice(LocalDateTime.now(), LocalDateTime.now(), "35455", "35455"));
+                this.priceService.getPrice(LocalDateTime.of(2020, 6, 15, 16,0,0),
+                        LocalDateTime.of(2020, 12,31, 23, 59, 59), "35455", "1"));
     }
 }
