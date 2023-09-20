@@ -22,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class PriceController {
 
+    public static final String DATE_FORMAT = "yyyy-MM-dd-HH.mm.ss";
     private final PriceUseCase priceUseCase;
 
     public PriceController(PriceUseCase priceUseCase) {
@@ -29,12 +30,12 @@ public class PriceController {
     }
 
     @GetMapping(value = "/startDate/{startDate}/endDate/{endDate}/productId/{productId}/brandId/{brandId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PriceDto>> getPrice(@PathVariable("startDate") @NotNull @DateTimeFormat(pattern = "yyyy-MM-dd-HH.mm.ss") final String startDate,
-                                                   @PathVariable("endDate") @NotNull @DateTimeFormat(pattern = "yyyy-MM-dd-HH.mm.ss") final String endDate,
+    public ResponseEntity<List<PriceDto>> getPrice(@PathVariable("startDate") @NotNull @DateTimeFormat(pattern = DATE_FORMAT) final String startDate,
+                                                   @PathVariable("endDate") @NotNull @DateTimeFormat(pattern = DATE_FORMAT) final String endDate,
                                                    @PathVariable("productId") @NotNull final String productId,
                                                    @PathVariable("brandId") @NotNull final String brandId) {
-        log.info("PriceController - method getPrice received request with parameters startDate: {} - productId: {} - brandId: {}", startDate,
-                productId, brandId);
+        log.info("PriceController - method getPrice received request with parameters startDate: {} - endDate: {} - productId: {} - brandId: {}", startDate,
+                endDate, productId, brandId);
         List<PriceDto> priceDto = this.priceUseCase.getPrice(startDate, endDate, productId, brandId);
 
         return ResponseEntity.status(HttpStatus.OK).body(priceDto);
