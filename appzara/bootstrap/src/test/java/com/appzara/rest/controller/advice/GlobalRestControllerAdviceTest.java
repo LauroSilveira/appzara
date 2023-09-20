@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -44,7 +45,7 @@ class GlobalRestControllerAdviceTest {
     void return_not_found_when_get_price_is_null_test() throws Exception {
         //Given
 
-        Mockito.when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
+        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
                 .thenThrow(new ResourceNotFoundException("Resource not found"));
 
         //When
@@ -76,7 +77,7 @@ class GlobalRestControllerAdviceTest {
     void return_internal_server_error_test() throws Exception {
 
         //Given
-        Mockito.when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
+        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
                 .thenThrow(HttpServerErrorException.InternalServerError.class);
 
         //When
