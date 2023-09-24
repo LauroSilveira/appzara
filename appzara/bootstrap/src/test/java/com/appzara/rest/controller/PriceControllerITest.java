@@ -72,6 +72,7 @@ class PriceControllerITest {
 
         assertFalse(prices.isEmpty());
         assertEquals(1, prices.size());
+        assertEquals(new BigDecimal("38.95"), (prices.get(0).amount()));
     }
 
     @Test
@@ -90,6 +91,7 @@ class PriceControllerITest {
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
         assertEquals(1, prices.size());
+        assertEquals(new BigDecimal("38.95"), (prices.get(0).amount()));
     }
 
     @Test
@@ -108,6 +110,7 @@ class PriceControllerITest {
         List<PriceDto> prices = mapper.readValue(response.getResponse().getContentAsString(), new TypeReference<>() {});
         assertFalse(prices.isEmpty());
         assertEquals(1, prices.size());
+        assertEquals(new BigDecimal("30.50"), (prices.get(0).amount()));
     }
 
     @Test
