@@ -11,15 +11,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class PriceUseCaseTest {
+
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
 
     @SpyBean
     private PriceUseCase priceUseCase;
@@ -43,12 +48,17 @@ class PriceUseCaseTest {
                                 new BigDecimal(23))
                 ));
         //When
-        final var prices = this.priceUseCase.getPrice("2023-09-19-10.23.00", "2023-09-20-10.23.00", "35455", "1");
+        final var price = this.priceUseCase.getPrice("2023-09-19-10.23.00", "2023-09-20-10.23.00", "35455", "1");
 
         //Then
-        assertNotNull(prices);
-        assertFalse(prices.isEmpty());
-        assertEquals(1, prices.size());
+        assertNotNull(price);
+        assertEquals(1, price.brandId());
+        assertEquals(1, price.priority());
+        assertEquals(1, price.rate());
+        assertEquals(new BigDecimal(23), price.amount());
+        assertEquals("35455", price.productId());
+        assertEquals(LocalDateTime.parse("2020-06-14-00.00.00", dateTimeFormatter), price.startDate());
+        assertEquals(LocalDateTime.parse("2020-12-31-23.59.59", dateTimeFormatter), price.endDate());
     }
 
     @Test
@@ -68,10 +78,17 @@ class PriceUseCaseTest {
                         new BigDecimal(23))));
 
         //When
-        final var prices = this.priceUseCase.getPrice("2020-06-15-00.00.00", "2020-06-15-11.00.00", "35455", "1");
+        final var price = this.priceUseCase.getPrice("2020-06-15-00.00.00", "2020-06-15-11.00.00", "35455", "1");
 
         //Then
-        assertFalse(prices.isEmpty());
-        assertEquals(1, prices.size());
+        assertNotNull(price);
+        assertEquals(1, price.brandId());
+        assertEquals(0, price.priority());
+        assertEquals(1, price.rate());
+        assertEquals("35455", price.productId());
+        assertEquals(new BigDecimal(23), price.amount());
+        assertEquals(LocalDateTime.parse("2020-06-15-00.00.00", dateTimeFormatter), price.startDate());
+        assertEquals(LocalDateTime.parse("2020-06-15-11.00.00", dateTimeFormatter), price.endDate());
+
     }
 }
