@@ -21,19 +21,21 @@ public class PriceUseCase {
         this.priceService = priceService;
     }
 
-    public List<PriceDto> getPrice(String startDate, String endDate, String productId,
+    public PriceDto getPrice(String startDate, String endDate, String productId,
                                    String brandId) {
         log.info("PriceUseCase - method getPrice parameters - startDate: {}, endDate: {}, productId: {}, " +
                 "brandId: {}", startDate, endDate, productId, brandId);
         final var startDateFormatted = getLocalDateTimeFormatted(startDate);
         final var endDateFormatted = getLocalDateTimeFormatted(endDate);
+
         final var prices = this.priceService.getPrice(startDateFormatted, endDateFormatted, productId, brandId);
 
         if (prices.size() > 1) {
-            return List.of(Objects.requireNonNull(prices.stream().filter(p -> p.priority() == 1)
-                    .max(Comparator.comparing(PriceDto::amount)).orElse(null)));
+            return Objects.requireNonNull(prices.stream().filter(p -> p.priority() == 1)
+                    .max(Comparator.comparing(PriceDto::amount))
+                    .orElse(null));
         }
-        return prices;
+        return prices.stream().findFirst().orElseGet(null);
     }
 
     private static LocalDateTime getLocalDateTimeFormatted(final String startDate) {
