@@ -26,14 +26,13 @@ public class PriceController {
         this.priceUseCase = priceUseCase;
     }
 
-    @GetMapping(value = "/startDate/{startDate}/endDate/{endDate}/productId/{productId}/brandId/{brandId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/startDate/{startDate}/productId/{productId}/brandId/{brandId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PriceDto> getPrice(@PathVariable("startDate") @NotNull @DateTimeFormat(pattern = DATE_FORMAT) final String startDate,
-                                                   @PathVariable("endDate") @NotNull @DateTimeFormat(pattern = DATE_FORMAT) final String endDate,
                                                    @PathVariable("productId") @NotNull final String productId,
                                                    @PathVariable("brandId") @NotNull final String brandId) {
-        log.info("PriceController - method getPrice received request with parameters startDate: {} - endDate: {} - productId: {} - brandId: {}", startDate,
-                endDate, productId, brandId);
-        PriceDto priceDto = this.priceUseCase.getPrice(startDate, endDate, productId, brandId);
+        log.info("[PriceController - method getPrice received request with parameters startDate: {} - productId: {} - brandId: {} ]", startDate,
+                productId, brandId);
+        PriceDto priceDto = this.priceUseCase.getPrice(startDate, productId, brandId);
 
         return ResponseEntity.status(HttpStatus.OK).body(priceDto);
 

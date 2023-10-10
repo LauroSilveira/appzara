@@ -15,10 +15,7 @@ This is a microservice REST created for ZARA recruitment.
 The architecture is built hexagonal architecture, where there is the followings modules:
 
 # Architecture
-![Architecture-hexagonal.png](data%2FArchitecture-hexagonal.png)
-
-#### API-REST
-Rest layer responsible for communicating with external calls.
+![Architecture-hexagonal.png](data/Architecture-hexagonal.png)
 
 #### APPLICATION
 Layer that implements UseCase and is responsible for communicate with others modules e.g. Infrastructure.
@@ -27,7 +24,7 @@ Layer that implements UseCase and is responsible for communicate with others mod
 Instantiates adapters and domain services and starts the entire application.
 
 #### INFRAESTRUCURE
-Persistence Layer, responsible for communicate with database.
+Layer that communicate with outside, e.g. http request, databases or brokers messages.
 
 # Technologies
 - Java 17
@@ -97,11 +94,11 @@ mvn test
 After execute tests jacoco-report will generate an index.html file with coverage.
 The directory of this file is `appzara/bootstrap/target/site/jacoco-aggregate/index.html`.
 
-![jacoco-index.png](data%2Fjacoco-index.png)
+![directory_index_jacoco.png](data/directory_index_jacoco.png)
 
 <p>Open it in your default browser to see the coverage of each module</p>
 
-![coverage-updated.png](data%2Fcoverage-updated.png)
+![coverage-updated.png](data/coverage-updated.png)
 
 ## Contributors
 [@LauroSilveira](https://github.com/LauroSilveira)

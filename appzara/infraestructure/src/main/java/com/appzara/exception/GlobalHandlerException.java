@@ -1,4 +1,4 @@
-package com.appzara.rest.controller.advice;
+package com.appzara.exception;
 
 import lombok.Getter;
 

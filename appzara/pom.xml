@@ -19,7 +19,6 @@
 
     <modules>
         <module>domain</module>
-        <module>api-rest</module>
         <module>application</module>
         <module>infraestructure</module>
         <module>bootstrap</module>

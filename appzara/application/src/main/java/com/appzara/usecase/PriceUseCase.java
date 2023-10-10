@@ -2,6 +2,7 @@ package com.appzara.usecase;
 
 import com.appzara.dto.PriceDto;
 import com.appzara.service.PriceService;
+import com.appzara.usecase.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,21 +22,20 @@ public class PriceUseCase {
         this.priceService = priceService;
     }
 
-    public PriceDto getPrice(String startDate, String endDate, String productId,
+    public PriceDto getPrice(String startDate, String productId,
                                    String brandId) {
-        log.info("PriceUseCase - method getPrice parameters - startDate: {}, endDate: {}, productId: {}, " +
-                "brandId: {}", startDate, endDate, productId, brandId);
+        log.info("PriceUseCase - method getPrice parameters - startDate: {}, productId: {}, " +
+                "brandId: {}", startDate, productId, brandId);
         final var startDateFormatted = getLocalDateTimeFormatted(startDate);
-        final var endDateFormatted = getLocalDateTimeFormatted(endDate);
 
-        final var prices = this.priceService.getPrice(startDateFormatted, endDateFormatted, productId, brandId);
+        final var prices = this.priceService.getPrice(startDateFormatted, productId, brandId);
 
         if (prices.size() > 1) {
             return Objects.requireNonNull(prices.stream().filter(p -> p.priority() == 1)
                     .max(Comparator.comparing(PriceDto::amount))
-                    .orElse(null));
+                    .orElseThrow(() -> new ResourceNotFoundException("No price found for the date")));
         }
-        return prices.stream().findFirst().orElseGet(null);
+        return prices.stream().findFirst().orElseThrow(() -> new ResourceNotFoundException("No price found for the date"));
     }
 
     private static LocalDateTime getLocalDateTimeFormatted(final String startDate) {
