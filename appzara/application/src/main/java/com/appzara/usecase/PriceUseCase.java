@@ -27,7 +27,6 @@ public class PriceUseCase {
         log.info("PriceUseCase - method getPrice parameters - startDate: {}, productId: {}, " +
                 "brandId: {}", startDate, productId, brandId);
         final var startDateFormatted = getLocalDateTimeFormatted(startDate);
-
         final var prices = this.priceService.getPrice(startDateFormatted, productId, brandId);
 
         if (prices.size() > 1) {
