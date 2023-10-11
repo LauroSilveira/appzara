@@ -67,6 +67,7 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
   "amount": 38.95
 }
 ```
+
 <p>Request to day 14 of 2020 at 16:00 hrs</p>
 <p>The response will be:</p>
 
@@ -96,7 +97,6 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
     "amount": 38.95
 }
 ```
-
 
 <p>Request to day 15 of 2020 at 21:00 hrs</p>
 <p>The response will be:</p>
