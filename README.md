@@ -67,7 +67,23 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
   "amount": 38.95
 }
 ```
+
 <p>Request to day 14 of 2020 at 16:00 hrs</p>
+<p>The response will be:</p>
+
+```json lines
+{
+  "brandId": 1,
+  "productId": "35455",
+  "priority": 1,
+  "rate": 4,
+  "startDate": "2020-06-15T16:00:00",
+  "endDate": "2020-12-31T23:59:59",
+  "amount": 38.95
+}
+```
+
+<p>Request to day 14 of 2020 at 21:00 hrs</p>
 <p>The response will be:</p>
 
 ```json lines
