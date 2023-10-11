@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface PriceService {
 
-    List<PriceDto> getPrice(LocalDateTime startDate, LocalDateTime endDate, String productId, String brandId);
+    List<PriceDto> getPrice(LocalDateTime startDate, String productId, String brandId);
 }

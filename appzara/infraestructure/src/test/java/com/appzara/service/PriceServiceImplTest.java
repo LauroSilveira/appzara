@@ -31,7 +31,7 @@ class PriceServiceImplTest {
     @Test
     void return_price_correctly_test() {
         //Given
-        when(this.priceRepository.getPrices(any(), any(), anyString(), anyString()))
+        when(this.priceRepository.getPrices(any(), anyString(), anyString()))
                 .thenReturn(List.of(Price.builder()
                                 .id(1L)
                                 .amount(new BigDecimal(500))
@@ -56,8 +56,7 @@ class PriceServiceImplTest {
                                 .build())
                 );
         //When
-        final var prices = this.priceService.getPrice(LocalDateTime.of(2020, 6, 15, 16,0,0),
-                LocalDateTime.of(2020, 12,31, 23, 59, 59), "35455", "1");
+        final var prices = this.priceService.getPrice(LocalDateTime.of(2020, 6, 15, 16, 0, 0), "35455", "1");
 
         //Then
         assertNotNull(prices);
@@ -68,12 +67,12 @@ class PriceServiceImplTest {
     @Test
     void should_throw_resourceNotFoundexception_test() {
         //Given
-        when(this.priceRepository.getPrices(any(), any(), anyString(), anyString()))
+        when(this.priceRepository.getPrices(any(), anyString(), anyString()))
                 .thenReturn(List.of());
 
         //Then
         assertThrows(ResourceNotFoundException.class, () ->
                 this.priceService.getPrice(LocalDateTime.of(2020, 6, 15, 16,0,0),
-                        LocalDateTime.of(2020, 12,31, 23, 59, 59), "35455", "1"));
+                        "35455", "1"));
     }
 }

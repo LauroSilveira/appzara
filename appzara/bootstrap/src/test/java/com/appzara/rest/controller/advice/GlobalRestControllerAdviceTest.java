@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ActiveProfiles("test")
 class GlobalRestControllerAdviceTest {
 
-    public static final String URL = "/price/startDate/{startDate}/endDate/{endDate}/productId/{productId}/brandId/{brandId}";
+    public static final String URL = "/price/startDate/{startDate}/productId/{productId}/brandId/{brandId}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,12 +45,11 @@ class GlobalRestControllerAdviceTest {
     void return_not_found_when_get_price_is_null_test() throws Exception {
         //Given
 
-        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
+        when(this.priceService.getPrice(any(), anyString(), anyString()))
                 .thenThrow(new ResourceNotFoundException("Resource not found"));
 
         //When
-        final var response = this.mockMvc.perform(get(URL,
-                        "2020-06-14-00.00.00", "2020-06-14-00.00.00", 35400, 2))
+        final var response = this.mockMvc.perform(get(URL, "2020-06-14-00.00.00", 35400, 2))
                 .andDo(print())
                 .andReturn();
 
@@ -63,7 +62,7 @@ class GlobalRestControllerAdviceTest {
     @Test
     void return_bad_request_when_date_is_invalid_test() throws Exception {
         //When
-        final var response = this.mockMvc.perform(get(URL, "2020-06-14", "2020-06-16", 35455, 1))
+        final var response = this.mockMvc.perform(get(URL, "2020-06-14", 35455, 1))
                 .andDo(print())
                 .andReturn();
 
@@ -77,12 +76,11 @@ class GlobalRestControllerAdviceTest {
     void return_internal_server_error_test() throws Exception {
 
         //Given
-        when(this.priceService.getPrice(any(), any(), anyString(), anyString()))
+        when(this.priceService.getPrice(any(), anyString(), anyString()))
                 .thenThrow(HttpServerErrorException.InternalServerError.class);
 
         //When
-        final var response = this.mockMvc.perform(get(URL,
-                        "2020-06-14-00.00.00", "2020-12-31-23.59.59", 35455, 2))
+        final var response = this.mockMvc.perform(get(URL, "2020-06-14-00.00.00", 35455, 2))
                 .andDo(print())
                 .andReturn();
         //Then
