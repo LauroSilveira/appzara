@@ -11,8 +11,12 @@
 * [Contributors](#contributors)
 
 # About
-This is a microservice REST created for ZARA recruitment.
-The architecture is built hexagonal architecture, where there is the followings modules:
+**Business rules**
+<p> Given a day and time, a database search is carried out to bring up the price with the tariff to be applied.
+If more than one element is found, some rules will apply:</p>
+<ul> 
+    <li>If the result finds two rates that coincide, the one with the highest value will apply.</li> 
+</ul>
 
 # Architecture
 ![Architecture-hexagonal.png](data/Architecture-hexagonal.png)
@@ -38,7 +42,7 @@ Layer that communicate with outside, e.g. http request, databases or brokers mes
 Import in your IDE and execute the main class AppZaraApplication localized on bootstrap module.
 In the API-REST module there is a PriceController with a GET endpoint with the following parameters:
 
-- startDate: date **must be int the format yyyy-MM-dd-HH.mm.ss**
+- startDate: date **must be int the format yyyy-MM-dd-HH.mm.ss** e.g. 2020-06-16-21.00.00
 - productId: id of product e.g. 35455
 - brandId: id of brand e.g: 1 (ZARA)
 </p>
@@ -48,38 +52,63 @@ In the API-REST module there is a PriceController with a GET endpoint with the f
 ```shell
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/productId/35455/brandId/1'
 ```
-<p>And an example of response is:</p>
+<p>Let us to some example of request</p>
+<p>Request to day 14 of 2020 at 10:00 hrs</p>
+<p>The response will be:</p>
 
 ```json lines
-[
-    {
-        "brandId": 1,
-        "productId": "35455",
-        "priority": 1,
-        "rate": 2,
-        "startDate": "2020-06-14T15:00:00",
-        "endDate": "2020-06-14T18:30:00",
-        "amount": 25.45
-    },
-    {
-        "brandId": 1,
-        "productId": "35455",
-        "priority": 1,
-        "rate": 3,
-        "startDate": "2020-06-15T00:00:00",
-        "endDate": "2020-06-15T11:00:00",
-        "amount": 30.50
-    },
-    {
-        "brandId": 1,
-        "productId": "35455",
-        "priority": 1,
-        "rate": 4,
-        "startDate": "2020-06-15T16:00:00",
-        "endDate": "2020-12-31T23:59:59",
-        "amount": 38.95
-    }
-]
+{
+  "brandId": 1,
+  "productId": "35455",
+  "priority": 1,
+  "rate": 4,
+  "startDate": "2020-06-15T16:00:00",
+  "endDate": "2020-12-31T23:59:59",
+  "amount": 38.95
+}
+```
+<p>Request to day 14 of 2020 at 16:00 hrs</p>
+<p>The response will be:</p>
+
+```json lines
+{
+    "brandId": 1,
+    "productId": "35455",
+    "priority": 1,
+    "rate": 4,
+    "startDate": "2020-06-15T16:00:00",
+    "endDate": "2020-12-31T23:59:59",
+    "amount": 38.95
+}
+```
+
+<p>Request to day 15 of 2020 at 21:00 hrs</p>
+<p>The response will be:</p>
+
+```json lines
+{
+    "brandId": 1,
+    "productId": "35455",
+    "priority": 1,
+    "rate": 4,
+    "startDate": "2020-06-15T16:00:00",
+    "endDate": "2020-12-31T23:59:59",
+    "amount": 38.95
+}
+```
+<p>Request to day 16 of 2020 at 21:00 hrs</p>
+<p>The response will be:</p>
+
+```json lines
+{
+    "brandId": 1,
+    "productId": "35455",
+    "priority": 1,
+    "rate": 3,
+    "startDate": "2020-06-15T00:00:00",
+    "endDate": "2020-06-15T11:00:00",
+    "amount": 30.50
+}
 ```
 
 # How to run Tests
