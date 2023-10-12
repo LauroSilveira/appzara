@@ -47,13 +47,13 @@ In the API-REST module there is a PriceController with a GET endpoint with the f
 - brandId: id of brand e.g: 1 (ZARA)
 </p>
 
-<p>A example of request:</p>
+<p>Lets see some examples of request</p>
+<p>Request to day 14 of 2020 at 10:00 hrs</p>
 
 ```shell
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/productId/35455/brandId/1'
 ```
-<p>Let us to some example of request</p>
-<p>Request to day 14 of 2020 at 10:00 hrs</p>
+
 <p>The response will be:</p>
 
 ```json lines
@@ -69,6 +69,11 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
 ```
 
 <p>Request to day 14 of 2020 at 16:00 hrs</p>
+
+```shell
+curl --location 'http://localhost:8080/price/startDate/2020-06-14-16.00.00/productId/35455/brandId/1'
+```
+
 <p>The response will be:</p>
 
 ```json lines
@@ -84,6 +89,10 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
 ```
 
 <p>Request to day 14 of 2020 at 21:00 hrs</p>
+
+```shell
+curl --location 'http://localhost:8080/price/startDate/2020-06-14-21.00.00/productId/35455/brandId/1'
+```
 <p>The response will be:</p>
 
 ```json lines
@@ -99,20 +108,28 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
 ```
 
 <p>Request to day 15 of 2020 at 21:00 hrs</p>
+
+```shell
+curl --location 'http://localhost:8080/price/startDate/2020-06-15-21.00.00/productId/35455/brandId/1'
+```
 <p>The response will be:</p>
 
 ```json lines
 {
-    "brandId": 1,
-    "productId": "35455",
-    "priority": 1,
-    "rate": 4,
-    "startDate": "2020-06-15T16:00:00",
-    "endDate": "2020-12-31T23:59:59",
-    "amount": 38.95
+  "brandId": 1,
+  "productId": "35455",
+  "priority": 1,
+  "rate": 3,
+  "startDate": "2020-06-15T00:00:00",
+  "endDate": "2020-06-15T11:00:00",
+  "amount": 30.50
 }
 ```
 <p>Request to day 16 of 2020 at 21:00 hrs</p>
+
+```shell
+curl --location 'http://localhost:8080/price/startDate/2020-06-16-21.00.00/productId/35455/brandId/1'
+```
 <p>The response will be:</p>
 
 ```json lines
