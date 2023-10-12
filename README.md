@@ -22,13 +22,17 @@ If more than one element is found, some rules will apply:</p>
 ![Architecture-hexagonal.png](data/Architecture-hexagonal.png)
 
 #### APPLICATION
-Layer that implements UseCase and is responsible for communicate with others modules e.g. Infrastructure.
+Layer that implements all use case and communicate with others modules e.g. Infrastructure.
 
 #### BOOTSTRAP
-Instantiates adapters and domain services and starts the entire application.
+This module is responsible for instantiating the other modules of the application.
+As the name suggests, it is the bootstrap.
+
+#### DOMAIN
+This module contains the database entities.
 
 #### INFRAESTRUCURE
-Layer that communicate with outside, e.g. http request, databases or brokers messages.
+This module connects with the outside world, such as databases, Http Rest calls, message brokers.
 
 # Technologies
 - Java 17
