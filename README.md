@@ -53,14 +53,14 @@ Get in the appzara folder:
 ``` 
 cd appzara/appzara
 ```
-To execute the Spring context put following command in your prompt:
+how to execute the Spring context put following command in your prompt:
 ```
 mvn spring-boot:run
 ```
 
-To stop 
+And how to stop:
 ```
-CTRL C
+ctrl c
 ```
 
 In the Infraestructure module there is a PriceController with a GET endpoint with the following parameters:

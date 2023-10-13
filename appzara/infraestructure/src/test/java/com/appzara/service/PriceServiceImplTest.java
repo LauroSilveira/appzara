@@ -2,6 +2,7 @@ package com.appzara.service;
 
 import com.appzara.entity.Price;
 import com.appzara.exception.ResourceNotFoundException;
+import com.appzara.mapper.PriceDtoMapperImpl;
 import com.appzara.repository.PriceRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,9 @@ class PriceServiceImplTest {
 
     @MockBean
     private PriceRepository priceRepository;
+
+    @SpyBean
+    private PriceDtoMapperImpl priceDtoMapper;
 
     @Test
     void return_price_correctly_test() {

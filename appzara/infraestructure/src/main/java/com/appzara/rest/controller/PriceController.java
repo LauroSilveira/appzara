@@ -2,6 +2,7 @@ package com.appzara.rest.controller;
 
 
 import com.appzara.dto.PriceDto;
+import com.appzara.mapper.PriceDtoMapper;
 import com.appzara.usecase.PriceUseCase;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,11 @@ public class PriceController {
 
     public static final String DATE_FORMAT = "yyyy-MM-dd-HH.mm.ss";
     private final PriceUseCase priceUseCase;
+    private PriceDtoMapper priceDtoMapper;
 
-    public PriceController(PriceUseCase priceUseCase) {
+    public PriceController(PriceUseCase priceUseCase, PriceDtoMapper priceDtoMapper) {
         this.priceUseCase = priceUseCase;
+        this.priceDtoMapper = priceDtoMapper;
     }
 
     @GetMapping(value = "/startDate/{startDate}/productId/{productId}/brandId/{brandId}", produces = MediaType.APPLICATION_JSON_VALUE)
