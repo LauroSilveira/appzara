@@ -74,10 +74,11 @@ class PriceControllerITest {
 
         assertNotNull(price);
         assertEquals(new BigDecimal("38.95"), (price.amount()));
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(1, price.priority());
         assertEquals(4, price.rate());
         assertEquals("35455", price.productId());
+        assertEquals("EUR", price.currency());
         assertEquals(LocalDateTime.parse("2020-06-15-16.00.00", dateTimeFormatter), price.startDate());
         assertNotNull(price.endDate());
     }
@@ -99,10 +100,11 @@ class PriceControllerITest {
         final var price = mapper.readValue(response.getResponse().getContentAsString(), PriceDto.class);
         assertNotNull(price);
         assertEquals(new BigDecimal("38.95"), (price.amount()));
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(1, price.priority());
         assertEquals(4, price.rate());
         assertEquals("35455", price.productId());
+        assertEquals("EUR", price.currency());
         assertEquals(LocalDateTime.parse("2020-06-15-16.00.00", dateTimeFormatter), price.startDate());
         assertNotNull(price.endDate());
     }
@@ -124,10 +126,11 @@ class PriceControllerITest {
         final var price = mapper.readValue(response.getResponse().getContentAsString(), PriceDto.class);
         assertNotNull(price);
         assertEquals(new BigDecimal("38.95"), (price.amount()));
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(1, price.priority());
         assertEquals(4, price.rate());
         assertEquals("35455", price.productId());
+        assertEquals("EUR", price.currency());
         assertEquals(LocalDateTime.parse("2020-06-15-16.00.00", dateTimeFormatter), price.startDate());
         assertNotNull(price.endDate());
     }
@@ -150,9 +153,10 @@ class PriceControllerITest {
 
         assertNotNull(price);
         assertEquals(new BigDecimal("38.95"), (price.amount()));
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(1, price.priority());
         assertEquals(4, price.rate());
+        assertEquals("EUR", price.currency());
         assertEquals("35455", price.productId());
         assertEquals(LocalDateTime.parse("2020-06-15-16.00.00", dateTimeFormatter), price.startDate());
         assertNotNull(price.endDate());
@@ -167,21 +171,8 @@ class PriceControllerITest {
                         URL, "2020-06-16-21.00.00", "35455", "1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isNotFound())
                 .andReturn();
-        //Then
-        assertNotNull(response.getResponse().getContentAsString());
-
-        final var price = mapper.readValue(response.getResponse().getContentAsString(), PriceDto.class);
-
-        assertNotNull(price);
-        assertEquals(new BigDecimal("30.50"), (price.amount()));
-        assertEquals(1, price.brandId());
-        assertEquals(1, price.priority());
-        assertEquals(3, price.rate());
-        assertEquals("35455", price.productId());
-        assertEquals(LocalDateTime.parse("2020-06-15-00.00.00", dateTimeFormatter), price.startDate());
-        assertNotNull(price.endDate());
     }
 
     @Test

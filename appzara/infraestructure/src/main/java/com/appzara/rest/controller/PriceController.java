@@ -32,6 +32,7 @@ public class PriceController {
                                                    @PathVariable("brandId") @NotNull final String brandId) {
         log.info("[PriceController - method getPrice received request with parameters startDate: {} - productId: {} - brandId: {} ]", startDate,
                 productId, brandId);
+
         PriceDto priceDto = this.priceUseCase.getPrice(startDate, productId, brandId);
 
         return ResponseEntity.status(HttpStatus.OK).body(priceDto);
