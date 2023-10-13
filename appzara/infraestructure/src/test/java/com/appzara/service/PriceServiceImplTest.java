@@ -3,7 +3,6 @@ package com.appzara.service;
 import com.appzara.entity.Price;
 import com.appzara.exception.ResourceNotFoundException;
 import com.appzara.repository.PriceRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,7 +30,7 @@ class PriceServiceImplTest {
     @Test
     void return_price_correctly_test() {
         //Given
-        when(this.priceRepository.getPrices(any(), anyString(), anyString()))
+        when(this.priceRepository.findAllByStartDateIsGreaterThanAndProductIdAndBrandId(any(), anyString(), anyString()))
                 .thenReturn(List.of(Price.builder()
                                 .id(1L)
                                 .amount(new BigDecimal(500))
@@ -39,7 +38,7 @@ class PriceServiceImplTest {
                                 .productId("35455")
                                 .priority(0)
                                 .currency("EUR")
-                                .brandId(1)
+                                .brandId("1")
                                 .startDate(LocalDateTime.of(2023, 9, 19, 9, 48))
                                 .endDate(LocalDateTime.of(2023, 9, 19, 18, 0))
                                 .build(),
@@ -50,7 +49,7 @@ class PriceServiceImplTest {
                                 .productId("35455")
                                 .priority(1)
                                 .currency("EUR")
-                                .brandId(1)
+                                .brandId("1")
                                 .startDate(LocalDateTime.of(2023, 9, 19, 9, 48))
                                 .endDate(LocalDateTime.of(2023, 9, 19, 18, 0))
                                 .build())
@@ -67,7 +66,7 @@ class PriceServiceImplTest {
     @Test
     void should_throw_resourceNotFoundexception_test() {
         //Given
-        when(this.priceRepository.getPrices(any(), anyString(), anyString()))
+        when(this.priceRepository.findAllByStartDateIsGreaterThanAndProductIdAndBrandId(any(), anyString(), anyString()))
                 .thenReturn(List.of());
 
         //Then

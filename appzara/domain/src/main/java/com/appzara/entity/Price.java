@@ -23,7 +23,7 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private int brandId;
+    private String brandId;
     @Column(nullable = false)
     private LocalDateTime startDate;
     @Column(nullable = false)

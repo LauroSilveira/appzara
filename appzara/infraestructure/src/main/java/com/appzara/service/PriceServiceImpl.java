@@ -26,14 +26,14 @@ public class PriceServiceImpl implements PriceService {
         log.info("PriceServiceImpl - query to priceRepository with parameters - date: {}, productId: {}, " +
                 "brandId: {}", date, productId, brandId);
 
-        final List<Price> prices = this.priceRepository.getPrices(date, productId, brandId);
+        final List<Price> prices = this.priceRepository.findAllByStartDateIsGreaterThanAndProductIdAndBrandId(date, productId, brandId);
 
         if(prices.isEmpty()) {
             throw new ResourceNotFoundException("Resource not found");
         }
-
             return prices.stream().map(price -> new PriceDto(price.getBrandId(), price.getProductId(),
-                            price.getPriority(), price.getRate(), price.getStartDate(), price.getEndDate(), price.getAmount()))
+                            price.getPriority(), price.getRate(), price.getStartDate(), price.getEndDate(),
+                            price.getAmount(), price.getCurrency()))
                     .toList();
     }
 }

@@ -37,22 +37,22 @@ class PriceUseCaseTest {
         //Given
         when(this.priceService.getPrice(any(), anyString(), anyString()))
                 .thenReturn(List.of(
-                        new PriceDto(1, "35455", 1, 1, LocalDateTime.of(2020, 6, 14, 0, 0, 0),
+                        new PriceDto("1", "35455", 1, 1, LocalDateTime.of(2020, 6, 14, 0, 0, 0),
                                 LocalDateTime.of(2020, 12, 31, 23, 59, 59),
-                                new BigDecimal(23)),
-                        new PriceDto(1, "35455", 0, 1, LocalDateTime.of(2020, 6, 14, 15, 0, 0),
+                                new BigDecimal(23), "EUR"),
+                        new PriceDto("1", "35455", 0, 1, LocalDateTime.of(2020, 6, 14, 15, 0, 0),
                                 LocalDateTime.of(2020, 6, 14, 18, 30, 0),
-                                new BigDecimal(23)),
-                        new PriceDto(1, "35455", 0, 1, LocalDateTime.of(2020, 6, 15, 0, 0, 0),
+                                new BigDecimal(23), "EUR"),
+                        new PriceDto("1", "35455", 0, 1, LocalDateTime.of(2020, 6, 15, 0, 0, 0),
                                 LocalDateTime.of(2020, 6, 15, 11, 0, 0),
-                                new BigDecimal(23))
+                                new BigDecimal(23), "EUR")
                 ));
         //When
         final var price = this.priceUseCase.getPrice("2023-09-19-10.23.00", "35455", "1");
 
         //Then
         assertNotNull(price);
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(1, price.priority());
         assertEquals(1, price.rate());
         assertEquals(new BigDecimal(23), price.amount());
@@ -71,17 +71,17 @@ class PriceUseCaseTest {
     void should_return_list_with_one_element() {
         //Given
         when(this.priceService.getPrice(any(), anyString(), anyString()))
-                .thenReturn(List.of(new PriceDto(1, "35455", 0, 1,
+                .thenReturn(List.of(new PriceDto("1", "35455", 0, 1,
                         LocalDateTime.of(2020, 6, 15, 0, 0, 0),
                         LocalDateTime.of(2020, 6, 15, 11, 0, 0),
-                        new BigDecimal(23))));
+                        new BigDecimal(23), "EUR")));
 
         //When
         final var price = this.priceUseCase.getPrice("2020-06-15-00.00.00", "35455", "1");
 
         //Then
         assertNotNull(price);
-        assertEquals(1, price.brandId());
+        assertEquals("1", price.brandId());
         assertEquals(0, price.priority());
         assertEquals(1, price.rate());
         assertEquals("35455", price.productId());

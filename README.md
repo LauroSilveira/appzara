@@ -43,18 +43,37 @@ This module connects with the outside world, such as databases, Http Rest calls,
 
 # How to Run
 <p>
-Import in your IDE and execute the main class AppZaraApplication localized on bootstrap module.
-In the API-REST module there is a PriceController with a GET endpoint with the following parameters:
+Clone the repository:
 
-- startDate: date **must be int the format yyyy-MM-dd-HH.mm.ss** e.g. 2020-06-16-21.00.00
-- productId: id of product e.g. 35455
-- brandId: id of brand e.g: 1 (ZARA)
+```
+git clone clone https://github.com/LauroSilveira/appzara.git
+```
+
+Get in the appzara folder:
+``` 
+cd appzara/appzara
+```
+To execute the Spring context put following command in your prompt:
+```
+mvn spring-boot:run
+```
+
+To stop 
+```
+CTRL C
+```
+
+In the Infraestructure module there is a PriceController with a GET endpoint with the following parameters:
+
+- startDate (mandatory): date **must be int the format yyyy-MM-dd-HH.mm.ss** e.g. 2020-06-16-21.00.00
+- productId (mandatory): id of product e.g. 35455
+- brandId (mandatory): id of brand e.g: 1 (ZARA)
 </p>
 
 <p>Lets see some examples of request</p>
 <p>Request to day 14 of 2020 at 10:00 hrs</p>
 
-```shell
+```
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/productId/35455/brandId/1'
 ```
 
@@ -74,7 +93,7 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-10.00.00/produ
 
 <p>Request to day 14 of 2020 at 16:00 hrs</p>
 
-```shell
+```
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-16.00.00/productId/35455/brandId/1'
 ```
 
@@ -94,7 +113,7 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-16.00.00/produ
 
 <p>Request to day 14 of 2020 at 21:00 hrs</p>
 
-```shell
+```
 curl --location 'http://localhost:8080/price/startDate/2020-06-14-21.00.00/productId/35455/brandId/1'
 ```
 <p>The response will be:</p>
@@ -113,7 +132,7 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-14-21.00.00/produ
 
 <p>Request to day 15 of 2020 at 21:00 hrs</p>
 
-```shell
+```
 curl --location 'http://localhost:8080/price/startDate/2020-06-15-21.00.00/productId/35455/brandId/1'
 ```
 <p>The response will be:</p>
@@ -131,7 +150,7 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-15-21.00.00/produ
 ```
 <p>Request to day 16 of 2020 at 21:00 hrs</p>
 
-```shell
+```
 curl --location 'http://localhost:8080/price/startDate/2020-06-16-21.00.00/productId/35455/brandId/1'
 ```
 <p>The response will be:</p>

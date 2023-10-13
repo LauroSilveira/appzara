@@ -35,10 +35,20 @@
             <artifactId>application</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+
             <!-- Jacoco Report -->
             <plugin>
                 <groupId>org.jacoco</groupId>
