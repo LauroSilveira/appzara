@@ -3,6 +3,7 @@ package com.appzara.service;
 import com.appzara.dto.PriceDto;
 import com.appzara.entity.Price;
 import com.appzara.exception.ResourceNotFoundException;
+import com.appzara.mapper.PriceDtoMapper;
 import com.appzara.repository.PriceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,11 @@ import java.util.List;
 public class PriceServiceImpl implements PriceService {
 
     private final PriceRepository priceRepository;
+    private final PriceDtoMapper priceDtoMapper;
 
-    public PriceServiceImpl(PriceRepository priceRepository) {
+    public PriceServiceImpl(PriceRepository priceRepository, PriceDtoMapper priceDtoMapper) {
         this.priceRepository = priceRepository;
+        this.priceDtoMapper = priceDtoMapper;
     }
 
     @Override
@@ -31,9 +34,7 @@ public class PriceServiceImpl implements PriceService {
         if(prices.isEmpty()) {
             throw new ResourceNotFoundException("Resource not found");
         }
-            return prices.stream().map(price -> new PriceDto(price.getBrandId(), price.getProductId(),
-                            price.getPriority(), price.getRate(), price.getStartDate(), price.getEndDate(),
-                            price.getAmount(), price.getCurrency()))
-                    .toList();
+
+        return this.priceDtoMapper.mapToPriceDto(prices);
     }
 }
