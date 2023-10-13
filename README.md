@@ -39,6 +39,7 @@ This module connects with the outside world, such as databases, Http Rest calls,
 - Spring boot 3.1.3
 - Spring Data
 - H2 Memory
+- Mapstruct
 - Jacoco Reporter
 
 # How to Run
