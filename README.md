@@ -171,7 +171,10 @@ curl --location 'http://localhost:8080/price/startDate/2020-06-16-21.00.00/produ
 # How to run Tests
 
 <p> This project has jacoco-report with we are able to see coverage after execute tests.
-Once you are inside appzara (pom.xml parente) open your favorite prompt execute:</p>
+There is unit tests and integration test.
+The integration test is annoted with @ActiveProfile("test") with you want to execute only him.
+To execute all test just run:
+</p>
 
 ```
 mvn test
